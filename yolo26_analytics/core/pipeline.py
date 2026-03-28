@@ -49,6 +49,8 @@ class Pipeline:
     async def run_async(self) -> None:
         import time
 
+        if hasattr(self._store, "initialize"):
+            await self._store.initialize()
         self._running = True
         fps_start = time.monotonic()
         fps_frames = 0
