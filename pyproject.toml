@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "yolo26-analytics"
-version = "0.1.1"
+version = "0.1.2"
 description = "Real-time object tracking, zone analytics, and event alerting built on YOLO26"
 readme = "README.md"
 license = "Apache-2.0"
