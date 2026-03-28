@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Live — yolo26-analytics{% endblock %}
+{% block content %}
+<div class="live-container">
+    <div class="video-panel">
+        <img src="/stream" alt="Live feed" class="live-feed">
+    </div>
+    <div class="sidebar">
+        <div class="stats" hx-get="/api/stats" hx-trigger="every 1s" hx-swap="innerHTML">
+            Loading stats...
+        </div>
+        <div class="event-log" hx-ext="sse" sse-connect="/events" sse-swap="message">
+            <h3>Events</h3>
+            <div id="events"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
