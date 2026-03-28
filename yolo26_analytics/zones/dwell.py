@@ -12,8 +12,10 @@ class DwellTracker:
         self._enter_times: dict[str, dict[int, datetime]] = {}
         self._alerted: dict[str, set[int]] = {}
 
-    def update(self, zone: Zone, tracks: list[Track], now: datetime) -> list[dict[str, object]]:
-        events: list[dict[str, object]] = []
+    def update(
+        self, zone: Zone, tracks: list[Track], now: datetime
+    ) -> list[dict[str, str | int | float]]:
+        events: list[dict[str, str | int | float]] = []
         zone_enters = self._enter_times.setdefault(zone.name, {})
         zone_alerted = self._alerted.setdefault(zone.name, set())
         current_inside: set[int] = set()

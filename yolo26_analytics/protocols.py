@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from collections.abc import AsyncIterator
-from typing import Protocol, runtime_checkable
+from typing import Any, Protocol, runtime_checkable
 
-import numpy as np
+import numpy.typing as npt
 
 from yolo26_analytics.models import Detection, Event, FrameMeta, Track
 
@@ -14,7 +14,7 @@ from yolo26_analytics.models import Detection, Event, FrameMeta, Track
 class VideoSource(Protocol):
     """Yields video frames."""
 
-    async def __aiter__(self) -> AsyncIterator[tuple[np.ndarray, FrameMeta]]: ...
+    async def __aiter__(self) -> AsyncIterator[tuple[npt.NDArray[Any], FrameMeta]]: ...
 
     async def close(self) -> None: ...
 
@@ -23,7 +23,7 @@ class VideoSource(Protocol):
 class Detector(Protocol):
     """Runs object detection on a frame."""
 
-    def predict(self, frame: np.ndarray) -> list[Detection]: ...
+    def predict(self, frame: npt.NDArray[Any]) -> list[Detection]: ...
 
 
 @runtime_checkable

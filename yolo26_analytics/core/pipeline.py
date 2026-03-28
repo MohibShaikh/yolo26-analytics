@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Callable
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from yolo26_analytics.store.postgres import PostgresStore
 
 from yolo26_analytics.alerts.manager import AlertManager
 from yolo26_analytics.config.schema import AppConfig, load_config
@@ -109,6 +112,7 @@ class Pipeline:
         tracker = ByteTrackAdapter(
             max_age=config.tracking.max_age, min_hits=config.tracking.min_hits
         )
+        store: SQLiteStore | PostgresStore
         if config.store.type == "postgresql" and config.store.url:
             from yolo26_analytics.store.postgres import PostgresStore
 

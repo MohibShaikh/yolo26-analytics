@@ -11,4 +11,5 @@ router = APIRouter()
 @router.get("/", response_class=HTMLResponse)
 async def live_view(request: Request) -> HTMLResponse:
     templates = request.app.state.templates
-    return templates.TemplateResponse(request=request, name="live.html")
+    response: HTMLResponse = templates.TemplateResponse(request=request, name="live.html")
+    return response

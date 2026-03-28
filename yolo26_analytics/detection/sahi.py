@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-import numpy as np
+from typing import Any
+
+import numpy.typing as npt
 
 from yolo26_analytics.models import Detection
 
@@ -20,7 +22,7 @@ class SAHIDetector:
         self._slice_size = slice_size
         self._overlap = overlap
 
-    def predict(self, frame: np.ndarray) -> list[Detection]:
+    def predict(self, frame: npt.NDArray[Any]) -> list[Detection]:
         h, w = frame.shape[:2]
         stride = int(self._slice_size * (1 - self._overlap))
         all_detections: list[Detection] = []

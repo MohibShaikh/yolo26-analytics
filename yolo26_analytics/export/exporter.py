@@ -6,7 +6,7 @@ import json
 import time
 from pathlib import Path
 
-from ultralytics import YOLO
+from ultralytics import YOLO  # type: ignore[attr-defined]
 
 
 def export_model(
@@ -27,7 +27,7 @@ def export_model(
     export_time = time.monotonic() - t0
     export_file = Path(str(export_path))
     file_size_mb = export_file.stat().st_size / (1024 * 1024) if export_file.exists() else 0
-    report = {
+    report: dict[str, object] = {
         "source_weights": weights,
         "format": format,
         "quantize": quantize,

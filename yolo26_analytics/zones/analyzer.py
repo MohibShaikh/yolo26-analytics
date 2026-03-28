@@ -53,10 +53,10 @@ class ZoneAnalyzer:
             if zone.name in self._entry_exit:
                 for ee in self._entry_exit[zone.name].update(zone, tracks):
                     event = self._make_event(
-                        event_type=ee["type"],
+                        event_type=str(ee["type"]),
                         zone_name=zone.name,
-                        track_id=ee["track_id"],
-                        object_class=ee["class_name"],
+                        track_id=int(ee["track_id"]),
+                        object_class=str(ee["class_name"]),
                         metadata=ee,
                         now=now,
                         cooldown=zone.cooldown,
@@ -68,8 +68,8 @@ class ZoneAnalyzer:
                     event = self._make_event(
                         event_type="dwell_exceeded",
                         zone_name=zone.name,
-                        track_id=de["track_id"],
-                        object_class=de["class_name"],
+                        track_id=int(de["track_id"]),
+                        object_class=str(de["class_name"]),
                         metadata=de,
                         now=now,
                         cooldown=zone.cooldown,

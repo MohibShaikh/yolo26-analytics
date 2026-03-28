@@ -7,7 +7,7 @@ import json
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from yolo26_analytics.models import FrameMeta, Track
+from yolo26_analytics.models import Event, FrameMeta, Track
 from yolo26_analytics.store.models import Base, EventRow, TrackRow
 
 
@@ -50,8 +50,13 @@ class PostgresStore:
             await session.commit()
 
     async def query_tracks(
-        self, source_id=None, zone_name=None, since=None, until=None, limit=1000
-    ):
+        self,
+        source_id: str | None = None,
+        zone_name: str | None = None,
+        since: str | None = None,
+        until: str | None = None,
+        limit: int = 1000,
+    ) -> list[dict[str, object]]:
         async with self._session_factory() as session:
             stmt = select(TrackRow).order_by(TrackRow.timestamp).limit(limit)
             if source_id:
@@ -74,7 +79,7 @@ class PostgresStore:
                 for r in result.scalars().all()
             ]
 
-    async def log_events(self, events):
+    async def log_events(self, events: list[Event]) -> None:
         async with self._session_factory() as session:
             for event in events:
                 session.add(
@@ -92,8 +97,13 @@ class PostgresStore:
             await session.commit()
 
     async def query_events(
-        self, zone_name=None, event_type=None, since=None, until=None, limit=1000
-    ):
+        self,
+        zone_name: str | None = None,
+        event_type: str | None = None,
+        since: str | None = None,
+        until: str | None = None,
+        limit: int = 1000,
+    ) -> list[dict[str, object]]:
         async with self._session_factory() as session:
             stmt = select(EventRow).order_by(EventRow.timestamp).limit(limit)
             if zone_name:

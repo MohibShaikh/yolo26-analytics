@@ -17,7 +17,7 @@ class Zone:
         self._polygon = Polygon(polygon)
 
     def contains_point(self, x: int, y: int) -> bool:
-        return self._polygon.contains(Point(x, y))
+        return bool(self._polygon.contains(Point(x, y)))
 
     def should_track(self, class_name: str) -> bool:
         return class_name in self.track_classes

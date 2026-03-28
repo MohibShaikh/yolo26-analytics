@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from sqlalchemy import delete
-from sqlalchemy.ext.asyncio import async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
 from yolo26_analytics.store.models import EventRow, TrackRow
 
@@ -28,7 +28,7 @@ def parse_duration(s: str) -> timedelta:
 
 
 async def run_retention_cleanup(
-    session_factory: async_sessionmaker,
+    session_factory: async_sessionmaker[AsyncSession],
     tracks_retention: str = "7d",
     events_retention: str = "90d",
     snapshots_retention: str = "30d",

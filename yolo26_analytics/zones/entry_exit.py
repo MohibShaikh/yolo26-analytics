@@ -8,8 +8,8 @@ class EntryExitDetector:
     def __init__(self) -> None:
         self._prev_state: dict[str, dict[int, bool]] = {}
 
-    def update(self, zone: Zone, tracks: list[Track]) -> list[dict[str, object]]:
-        events: list[dict[str, object]] = []
+    def update(self, zone: Zone, tracks: list[Track]) -> list[dict[str, str | int]]:
+        events: list[dict[str, str | int]] = []
         zone_state = self._prev_state.setdefault(zone.name, {})
         current_ids: set[int] = set()
         for track in tracks:

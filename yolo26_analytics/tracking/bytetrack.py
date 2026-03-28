@@ -2,34 +2,39 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
+import numpy.typing as npt
 
 from yolo26_analytics.models import Detection, Track
+
+_NDArray = npt.NDArray[Any]
 
 
 class _DetectionResults:
     """Wraps a numpy detection array to match the interface expected by BYTETracker.update."""
 
-    def __init__(self, data: np.ndarray) -> None:
+    def __init__(self, data: _NDArray) -> None:
         # data shape: (N, 6) — [x1, y1, x2, y2, confidence, class_id]
         self._data = data
 
     def __len__(self) -> int:
         return len(self._data)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: int | slice | _NDArray) -> _DetectionResults:
         return _DetectionResults(self._data[idx])
 
     @property
-    def conf(self) -> np.ndarray:
+    def conf(self) -> _NDArray:
         return self._data[:, 4]
 
     @property
-    def cls(self) -> np.ndarray:
+    def cls(self) -> _NDArray:
         return self._data[:, 5]
 
     @property
-    def xywh(self) -> np.ndarray:
+    def xywh(self) -> _NDArray:
         """Convert x1y1x2y2 to cx, cy, w, h."""
         x1, y1, x2, y2 = (
             self._data[:, 0],
@@ -44,7 +49,7 @@ class _DetectionResults:
         return np.stack([cx, cy, w, h], axis=1)
 
     @property
-    def xyxy(self) -> np.ndarray:
+    def xyxy(self) -> _NDArray:
         return self._data[:, :4]
 
 

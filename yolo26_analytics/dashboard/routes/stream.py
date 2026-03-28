@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import json
 from collections import deque
+from collections.abc import AsyncGenerator
 from typing import Any
 
 from fastapi import APIRouter, Request
@@ -25,7 +26,7 @@ def push_event(event_data: dict[str, Any]) -> None:
     _event_queue.append(event_data)
 
 
-async def _mjpeg_generator():
+async def _mjpeg_generator() -> AsyncGenerator[bytes, None]:
     while True:
         if _latest_frame is not None:
             yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + _latest_frame + b"\r\n")
@@ -41,7 +42,7 @@ async def mjpeg_stream() -> StreamingResponse:
 
 @router.get("/events")
 async def sse_events(request: Request) -> EventSourceResponse:
-    async def event_generator():
+    async def event_generator() -> AsyncGenerator[dict[str, str], None]:
         last_idx = 0
         while True:
             if await request.is_disconnected():

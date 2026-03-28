@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-import numpy as np
-from ultralytics import YOLO
+from typing import Any
+
+import numpy.typing as npt
+from ultralytics import YOLO  # type: ignore[attr-defined]
 
 from yolo26_analytics.models import Detection
 
@@ -16,7 +18,7 @@ class YOLO26Detector:
         self._confidence = confidence
         self._names: dict[int, str] = self._model.names
 
-    def predict(self, frame: np.ndarray) -> list[Detection]:
+    def predict(self, frame: npt.NDArray[Any]) -> list[Detection]:
         results = self._model(frame, verbose=False)
         detections: list[Detection] = []
         for result in results:
