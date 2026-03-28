@@ -1,5 +1,6 @@
 """yolo26-analytics: Real-time object tracking, zone analytics, and event alerting on YOLO26."""
 
+from yolo26_analytics.core.pipeline import Pipeline
 from yolo26_analytics.models import Detection, Event, FrameMeta, Track
 from yolo26_analytics.protocols import (
     AlertBackend,
@@ -17,6 +18,7 @@ __all__ = [
     "Event",
     "EventStore",
     "FrameMeta",
+    "Pipeline",
     "Track",
     "Tracker",
     "TrackStore",
