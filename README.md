@@ -2,7 +2,7 @@
 
 Real-time object tracking, zone analytics, and event alerting built on YOLO26.
 
-[![CI](https://github.com/YOUR_USERNAME/yolo26-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/yolo26-analytics/actions)
+[![CI](https://github.com/MohibShaikh/yolo26-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/MohibShaikh/yolo26-analytics/actions)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 ## What is this?
