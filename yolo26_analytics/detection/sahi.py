@@ -1,10 +1,15 @@
 """SAHI (Slicing Aided Hyper Inference) wrapper for any detector."""
+
 from __future__ import annotations
+
 import numpy as np
+
 from yolo26_analytics.models import Detection
+
 
 class SAHIDetector:
     """Wraps any Detector with slice-based inference for small object detection."""
+
     def __init__(
         self,
         detector: object,

@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 from datetime import datetime
+
 from yolo26_analytics.models import Track
 from yolo26_analytics.zones.polygon import Zone
+
 
 class DwellTracker:
     def __init__(self, alert_threshold: int = 300) -> None:
@@ -29,8 +32,14 @@ class DwellTracker:
             dwell_secs = (now - zone_enters[track.track_id]).total_seconds()
             if dwell_secs >= self._threshold and track.track_id not in zone_alerted:
                 zone_alerted.add(track.track_id)
-                events.append({"type": "dwell_exceeded", "track_id": track.track_id,
-                    "class_name": track.class_name, "dwell_seconds": dwell_secs})
+                events.append(
+                    {
+                        "type": "dwell_exceeded",
+                        "track_id": track.track_id,
+                        "class_name": track.class_name,
+                        "dwell_seconds": dwell_secs,
+                    }
+                )
         for tid in list(zone_enters.keys()):
             if tid not in current_inside:
                 zone_enters.pop(tid, None)

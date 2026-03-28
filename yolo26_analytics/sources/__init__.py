@@ -1,5 +1,7 @@
 """Video source factory."""
+
 from __future__ import annotations
+
 from yolo26_analytics.config.schema import SourceConfig
 from yolo26_analytics.sources.image_dir import ImageDirSource
 from yolo26_analytics.sources.rtsp import RTSPSource

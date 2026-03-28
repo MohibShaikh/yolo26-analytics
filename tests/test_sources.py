@@ -1,19 +1,20 @@
 from __future__ import annotations
+
 from pathlib import Path
+
 import cv2
 import numpy as np
 import pytest
-from yolo26_analytics.sources.video_file import VideoFileSource
-from yolo26_analytics.sources.image_dir import ImageDirSource
-from yolo26_analytics.sources import create_source
+
 from yolo26_analytics.config.schema import SourceConfig
+from yolo26_analytics.sources import create_source
+from yolo26_analytics.sources.image_dir import ImageDirSource
+from yolo26_analytics.sources.video_file import VideoFileSource
 
 
 def _create_test_video(path: str, num_frames: int = 10) -> None:
     """Write a small test video."""
-    writer = cv2.VideoWriter(
-        path, cv2.VideoWriter_fourcc(*"mp4v"), 30.0, (640, 480)
-    )
+    writer = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*"mp4v"), 30.0, (640, 480))
     for i in range(num_frames):
         frame = np.full((480, 640, 3), i * 25, dtype=np.uint8)
         writer.write(frame)

@@ -1,5 +1,7 @@
 """CLI entry point for yolo26-analytics (y26a)."""
+
 from __future__ import annotations
+
 import click
 
 
@@ -71,7 +73,9 @@ def export(model: str, fmt: str, quantize: str | None) -> None:
 def heatmap(source: str, output: str, model: str, duration: int | None) -> None:
     """Generate a heatmap from a video source."""
     import time
+
     import cv2
+
     from yolo26_analytics.analytics.heatmap import HeatmapAccumulator, generate_heatmap_image
     from yolo26_analytics.detection.yolo26 import YOLO26Detector
     from yolo26_analytics.tracking.bytetrack import ByteTrackAdapter

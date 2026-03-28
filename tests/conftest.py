@@ -1,4 +1,5 @@
 """Shared test fixtures."""
+
 from __future__ import annotations
 
 import numpy as np
@@ -26,7 +27,4 @@ def sample_detections() -> list[Detection]:
 @pytest.fixture
 def sample_tracks(sample_detections: list[Detection]) -> list[Track]:
     """Sample tracks with IDs assigned."""
-    return [
-        Track(track_id=i + 1, detection=det)
-        for i, det in enumerate(sample_detections)
-    ]
+    return [Track(track_id=i + 1, detection=det) for i, det in enumerate(sample_detections)]

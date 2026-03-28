@@ -39,9 +39,7 @@ class Tracker(Protocol):
 class TrackStore(Protocol):
     """Persists track updates."""
 
-    async def write_tracks(
-        self, tracks: list[Track], meta: FrameMeta
-    ) -> None: ...
+    async def write_tracks(self, tracks: list[Track], meta: FrameMeta) -> None: ...
 
     async def query_tracks(
         self,

@@ -1,19 +1,12 @@
+from pathlib import Path
+
 import pytest
 import yaml
 
 from yolo26_analytics.config.schema import (
-    AlertConfig,
-    AppConfig,
-    ModelConfig,
-    SourceConfig,
-    StoreConfig,
-    TrackingConfig,
-    ZoneAnalyticsRule,
     ZoneConfig,
     load_config,
 )
-
-from pathlib import Path
 
 MINIMAL_CONFIG = {
     "source": {"type": "video_file", "path": "test.mp4"},

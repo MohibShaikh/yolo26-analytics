@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock
 
 import numpy as np
 import pytest
 
 from yolo26_analytics.core.pipeline import Pipeline
-from yolo26_analytics.models import Detection, Event, FrameMeta, Track
+from yolo26_analytics.models import Detection, FrameMeta, Track
 
 
 class FakeSource:

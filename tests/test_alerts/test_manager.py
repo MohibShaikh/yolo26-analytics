@@ -1,20 +1,35 @@
 from __future__ import annotations
+
 from datetime import datetime, timezone
+
 import pytest
+
 from yolo26_analytics.alerts.manager import AlertManager
 from yolo26_analytics.config.schema import AlertFilterConfig
 from yolo26_analytics.models import Event
 
+
 def _make_event(zone: str = "Dock", event_type: str = "entry") -> Event:
-    return Event(timestamp=datetime.now(tz=timezone.utc), event_type=event_type,
-        zone_name=zone, track_id=1, object_class="person", metadata={},
-        confidence=0.9, frame_snapshot=b"", bbox=(0, 0, 0, 0))
+    return Event(
+        timestamp=datetime.now(tz=timezone.utc),
+        event_type=event_type,
+        zone_name=zone,
+        track_id=1,
+        object_class="person",
+        metadata={},
+        confidence=0.9,
+        frame_snapshot=b"",
+        bbox=(0, 0, 0, 0),
+    )
+
 
 class FakeBackend:
     def __init__(self) -> None:
         self.received: list[Event] = []
+
     async def send(self, event: Event) -> None:
         self.received.append(event)
+
 
 class TestAlertManager:
     @pytest.mark.asyncio

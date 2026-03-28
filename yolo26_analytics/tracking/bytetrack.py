@@ -1,6 +1,9 @@
 """ByteTrack adapter using Ultralytics' built-in tracker."""
+
 from __future__ import annotations
+
 import numpy as np
+
 from yolo26_analytics.models import Detection, Track
 
 

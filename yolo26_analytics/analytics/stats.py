@@ -1,9 +1,11 @@
 """Zone statistics aggregation."""
+
 from __future__ import annotations
-from datetime import datetime
+
 
 class ZoneStatsAggregator:
     """Aggregates zone statistics for the dashboard and API."""
+
     def __init__(self) -> None:
         self._counts: dict[str, dict[str, int]] = {}
         self._entries: dict[str, int] = {}

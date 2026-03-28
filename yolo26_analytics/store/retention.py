@@ -1,10 +1,14 @@
 """Periodic retention cleanup for old tracks, events, and snapshots."""
+
 from __future__ import annotations
+
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
 from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import async_sessionmaker
+
 from yolo26_analytics.store.models import EventRow, TrackRow
 
 
@@ -14,15 +18,22 @@ def parse_duration(s: str) -> timedelta:
         raise ValueError(f"Invalid duration format: {s}")
     value = int(match.group(1))
     unit = match.group(2)
-    if unit == "d": return timedelta(days=value)
-    if unit == "h": return timedelta(hours=value)
-    if unit == "m": return timedelta(minutes=value)
+    if unit == "d":
+        return timedelta(days=value)
+    if unit == "h":
+        return timedelta(hours=value)
+    if unit == "m":
+        return timedelta(minutes=value)
     return timedelta(seconds=value)
 
 
-async def run_retention_cleanup(session_factory: async_sessionmaker,
-    tracks_retention: str = "7d", events_retention: str = "90d",
-    snapshots_retention: str = "30d", snapshots_dir: str = "data/snapshots") -> None:
+async def run_retention_cleanup(
+    session_factory: async_sessionmaker,
+    tracks_retention: str = "7d",
+    events_retention: str = "90d",
+    snapshots_retention: str = "30d",
+    snapshots_dir: str = "data/snapshots",
+) -> None:
     now = datetime.now(tz=timezone.utc)
     async with session_factory() as session:
         cutoff = now - parse_duration(tracks_retention)

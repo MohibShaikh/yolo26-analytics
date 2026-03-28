@@ -1,6 +1,7 @@
 from __future__ import annotations
-from unittest.mock import patch, MagicMock
+
 from click.testing import CliRunner
+
 from yolo26_analytics.cli import main
 
 

@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 from collections import defaultdict
+
 from yolo26_analytics.models import Track
 from yolo26_analytics.zones.polygon import Zone
+
 
 class ZoneCounting:
     def update(self, zone: Zone, tracks: list[Track]) -> dict[str, int]:

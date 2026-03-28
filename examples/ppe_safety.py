@@ -48,6 +48,7 @@ dashboard: true
 
 if __name__ == "__main__":
     from pathlib import Path
+
     config_path = Path("config_ppe.yaml")
     config_path.write_text(CONFIG)
     print(f"Config written to {config_path}")

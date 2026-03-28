@@ -1,9 +1,11 @@
 from __future__ import annotations
+
 from unittest.mock import MagicMock, patch
+
 import numpy as np
 import pytest
+
 from yolo26_analytics.detection.yolo26 import YOLO26Detector
-from yolo26_analytics.models import Detection
 
 
 class TestYOLO26Detector:

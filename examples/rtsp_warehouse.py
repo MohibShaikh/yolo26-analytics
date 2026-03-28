@@ -56,7 +56,6 @@ dashboard: true
 
 if __name__ == "__main__":
     from pathlib import Path
-    from yolo26_analytics.core.pipeline import Pipeline
 
     config_path = Path("config_warehouse.yaml")
     config_path.write_text(CONFIG)

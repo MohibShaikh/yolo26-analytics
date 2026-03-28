@@ -1,15 +1,19 @@
 """Video file source."""
+
 from __future__ import annotations
+
 from collections.abc import AsyncIterator
 from datetime import datetime, timezone
+
 import cv2
-import numpy as np
+
 from yolo26_analytics.models import FrameMeta
 from yolo26_analytics.sources.base import FrameItem
 
 
 class VideoFileSource:
     """Reads frames from a video file."""
+
     def __init__(self, path: str, source_id: str) -> None:
         self._path = path
         self._source_id = source_id

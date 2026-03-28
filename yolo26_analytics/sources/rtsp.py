@@ -1,14 +1,19 @@
 """RTSP stream source."""
+
 from __future__ import annotations
+
 from collections.abc import AsyncIterator
 from datetime import datetime, timezone
+
 import cv2
+
 from yolo26_analytics.models import FrameMeta
 from yolo26_analytics.sources.base import FrameItem
 
 
 class RTSPSource:
     """Reads frames from an RTSP stream."""
+
     def __init__(self, url: str, source_id: str = "rtsp") -> None:
         self._url = url
         self._source_id = source_id

@@ -1,10 +1,14 @@
 """Heatmap generation from track centroid positions."""
+
 from __future__ import annotations
+
 import cv2
 import numpy as np
 
+
 class HeatmapAccumulator:
     """Accumulates centroid positions into a 2D histogram."""
+
     def __init__(self, width: int = 1920, height: int = 1080) -> None:
         self._width = width
         self._height = height
@@ -19,6 +23,7 @@ class HeatmapAccumulator:
 
     def reset(self) -> None:
         self._accumulator[:] = 0.0
+
 
 def generate_heatmap_image(
     accumulator: HeatmapAccumulator,

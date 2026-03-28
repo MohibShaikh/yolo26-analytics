@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 from datetime import datetime, timedelta
+
 from yolo26_analytics.models import Track
 from yolo26_analytics.zones.polygon import Zone
+
 
 class ThroughputTracker:
     def __init__(self, interval: int = 3600) -> None:

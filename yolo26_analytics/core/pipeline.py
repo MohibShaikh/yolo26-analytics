@@ -1,8 +1,10 @@
 """Pipeline — the main orchestrator."""
+
 from __future__ import annotations
 
 import asyncio
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 from yolo26_analytics.alerts.manager import AlertManager
 from yolo26_analytics.config.schema import AppConfig, load_config
@@ -87,12 +89,12 @@ class Pipeline:
         self._running = False
 
     @classmethod
-    def from_yaml(cls, path: str) -> "Pipeline":
+    def from_yaml(cls, path: str) -> Pipeline:
         config = load_config(path)
         return cls._from_config(config)
 
     @classmethod
-    def _from_config(cls, config: AppConfig) -> "Pipeline":
+    def _from_config(cls, config: AppConfig) -> Pipeline:
         from yolo26_analytics.alerts.console import ConsoleAlert
         from yolo26_analytics.alerts.mqtt import MQTTAlert
         from yolo26_analytics.alerts.telegram import TelegramAlert
@@ -104,7 +106,9 @@ class Pipeline:
 
         source = create_source(config.source)
         detector = YOLO26Detector(weights=config.model.weights, confidence=config.model.confidence)
-        tracker = ByteTrackAdapter(max_age=config.tracking.max_age, min_hits=config.tracking.min_hits)
+        tracker = ByteTrackAdapter(
+            max_age=config.tracking.max_age, min_hits=config.tracking.min_hits
+        )
         if config.store.type == "postgresql" and config.store.url:
             from yolo26_analytics.store.postgres import PostgresStore
 

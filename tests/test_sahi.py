@@ -1,12 +1,16 @@
 from __future__ import annotations
+
 import numpy as np
+
 from yolo26_analytics.detection.sahi import SAHIDetector
 from yolo26_analytics.models import Detection
+
 
 class FakeDetector:
     def predict(self, frame: np.ndarray) -> list[Detection]:
         h, w = frame.shape[:2]
         return [Detection(bbox=(10, 10, 50, 50), confidence=0.9, class_name="person")]
+
 
 class TestSAHI:
     def test_tiles_and_offsets(self) -> None:

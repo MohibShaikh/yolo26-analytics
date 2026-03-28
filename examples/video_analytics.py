@@ -1,13 +1,15 @@
 """Process a recorded video and generate heatmap + stats."""
 
 import asyncio
+
+import cv2
+
+from yolo26_analytics.analytics.heatmap import HeatmapAccumulator, generate_heatmap_image
 from yolo26_analytics.core.pipeline import Pipeline
 from yolo26_analytics.detection.yolo26 import YOLO26Detector
-from yolo26_analytics.tracking.bytetrack import ByteTrackAdapter
 from yolo26_analytics.sources.video_file import VideoFileSource
 from yolo26_analytics.store.sqlite import SQLiteStore
-from yolo26_analytics.analytics.heatmap import HeatmapAccumulator, generate_heatmap_image
-import cv2
+from yolo26_analytics.tracking.bytetrack import ByteTrackAdapter
 
 
 async def main() -> None:

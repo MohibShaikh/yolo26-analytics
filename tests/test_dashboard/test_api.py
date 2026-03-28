@@ -1,11 +1,15 @@
 from __future__ import annotations
+
 import pytest
 from httpx import ASGITransport, AsyncClient
+
 from yolo26_analytics.dashboard.app import create_app
+
 
 @pytest.fixture
 def app():
     return create_app(store=None, pipeline=None, zone_analyzer=None)
+
 
 class TestDashboardAPI:
     @pytest.mark.asyncio
