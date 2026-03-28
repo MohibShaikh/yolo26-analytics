@@ -121,4 +121,4 @@ Starts the app + PostgreSQL. Dashboard at `http://localhost:8000`.
 
 ## License
 
-MIT
+Apache 2.0
