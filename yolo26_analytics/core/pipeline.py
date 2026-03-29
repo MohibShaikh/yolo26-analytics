@@ -101,7 +101,9 @@ class Pipeline:
     @classmethod
     def _from_config(cls, config: AppConfig) -> Pipeline:
         from yolo26_analytics.alerts.console import ConsoleAlert
+        from yolo26_analytics.alerts.discord import DiscordAlert
         from yolo26_analytics.alerts.mqtt import MQTTAlert
+        from yolo26_analytics.alerts.slack import SlackAlert
         from yolo26_analytics.alerts.telegram import TelegramAlert
         from yolo26_analytics.alerts.webhook import WebhookAlert
         from yolo26_analytics.detection.yolo26 import YOLO26Detector
@@ -110,7 +112,19 @@ class Pipeline:
         from yolo26_analytics.tracking.bytetrack import ByteTrackAdapter
 
         source = create_source(config.source)
-        detector = YOLO26Detector(weights=config.model.weights, confidence=config.model.confidence)
+        detector: Any
+        if config.model.type == "rfdetr":
+            from yolo26_analytics.detection.rfdetr import RFDETRDetector
+
+            detector = RFDETRDetector(
+                model_size=config.model.model_size,
+                confidence=config.model.confidence,
+            )
+        else:
+            detector = YOLO26Detector(
+                weights=config.model.weights,
+                confidence=config.model.confidence,
+            )
         tracker = ByteTrackAdapter(
             max_age=config.tracking.max_age, min_hits=config.tracking.min_hits
         )
@@ -134,6 +148,10 @@ class Pipeline:
                     backend = MQTTAlert(broker=ac.broker or "", topic=ac.topic or "yolo26/events")
                 case "telegram":
                     backend = TelegramAlert(bot_token=ac.bot_token or "", chat_id=ac.chat_id or "")
+                case "slack":
+                    backend = SlackAlert(webhook_url=ac.webhook_url or ac.url or "")
+                case "discord":
+                    backend = DiscordAlert(webhook_url=ac.webhook_url or ac.url or "")
                 case _:
                     continue
             backends.append((backend, ac.filter))

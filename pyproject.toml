@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "yolo26-analytics"
-version = "0.1.2"
+version = "0.1.3"
 description = "Real-time object tracking, zone analytics, and event alerting built on YOLO26"
 readme = "README.md"
 license = "Apache-2.0"
@@ -59,6 +59,9 @@ dev = [
     "types-PyYAML>=6.0.0",
     "testcontainers[postgres]>=3.7.0",
 ]
+rfdetr = [
+    "rfdetr>=1.0.0",
+]
 sahi = [
     "sahi>=0.11.0",
 ]
@@ -91,6 +94,7 @@ module = [
     "aiomqtt.*",
     "cv2.*",
     "sse_starlette.*",
+    "rfdetr.*",
 ]
 ignore_missing_imports = true
 

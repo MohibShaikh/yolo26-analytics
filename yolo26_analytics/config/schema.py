@@ -22,8 +22,9 @@ class SAHIConfig(BaseModel):
 
 
 class ModelConfig(BaseModel):
-    type: str = "yolo26"
+    type: str = "yolo26"  # "yolo26" or "rfdetr"
     weights: str = "yolo26n.pt"
+    model_size: str = "base"  # for rfdetr: "base" or "large"
     confidence: float = 0.5
     sahi: SAHIConfig | None = None
 
@@ -75,8 +76,9 @@ class AlertFilterConfig(BaseModel):
 
 
 class AlertConfig(BaseModel):
-    type: str  # "console", "webhook", "mqtt", "telegram"
+    type: str  # "console", "webhook", "mqtt", "telegram", "slack", "discord"
     url: str | None = None
+    webhook_url: str | None = None
     bot_token: str | None = None
     chat_id: str | None = None
     broker: str | None = None
